@@ -7,16 +7,15 @@
 #include <stdio.h>
 #include <string.h>
 
-char best_sum_name[10];
-char below_average_names[5][10];
-int count = 0;
-
-void scan_input(){
+int main(){
+    char name[10];
+    char best_sum_name[10];
+    char below_average_names[5][10];
     int points[13];
     int points_average = 5; // points 0-10
     int sum = 0;
     int best_sum = 0;
-    char name[10];
+    int count = 0;
 
     for (int i = 0; i < 5; i++){
         sum = 0;
@@ -44,10 +43,7 @@ void scan_input(){
             count++;
         }
     }
-}
 
-int main(){
-    scan_input();
     printf("%s\n", best_sum_name);
 
     for (int i = 0; i < count; i++){
