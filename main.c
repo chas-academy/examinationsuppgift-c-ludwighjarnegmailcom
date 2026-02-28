@@ -1,48 +1,58 @@
 /*
-    Examinationsuppgift C
+    Examinationsuppgift C - Fullstack .NET
     Ludwig Hjärne
-    2026-02-27
+    2026-02-28
 */
 
 #include <stdio.h>
+#include <string.h>
 
-int main(){
-    char name[10];
+char best_sum_name[10];
+char below_average_names[5][10];
+int count = 0;
+
+void scan_input(){
     int points[13];
-    int mean_value = 5;
+    int points_average = 5; // points 0-10
+    int sum = 0;
+    int best_sum = 0;
+    char name[10];
 
-    for (int a = 0; a < 5; a++){
-        int sum = 0;
-
+    for (int i = 0; i < 5; i++){
+        sum = 0;
         scanf("%s", name);
 
         for (int i = 0; i < 13; i++){
-            scanf("%d", &points[i]); // <-- lita på mig det ska vara ett '&'-tecken där
-            sum = sum + points[i];
+            scanf("%d", &points[i]); 
+            sum += points[i];
         }
-
-        // printf("Sum: %d\n", sum);
         
         // If first letter is lowercase, make it uppercase.
         if (name[0] > 90){ 
             name[0] = name[0] - 32;
         }
 
-        if (sum/13 <= mean_value){
-            printf("\n%s\n", name);
+        // Compares and saves the name that has highest average points
+        if (sum/13.0 > best_sum/13.0){
+            best_sum = sum;
+            strcpy(best_sum_name, name);
         }
 
-        /*  Print Name and points in a line
-
-            printf("%s", name);
-
-            for (int j = 0; j < 13; j++){
-                printf(" %d", points[j]);
-            }
-
-            printf("\n");
-        */
+        // Saves the names that have below average points
+        if (sum/13.0 <= points_average){
+            strcpy(below_average_names[count], name);
+            count++;
+        }
     }
-    
+}
+
+int main(){
+    scan_input();
+    printf("%s\n", best_sum_name);
+
+    for (int i = 0; i < count; i++){
+        printf("%s\n", below_average_names[i]);
+    }
+
     return 0;
 }
