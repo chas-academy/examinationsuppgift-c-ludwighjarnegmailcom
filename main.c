@@ -38,17 +38,18 @@ int main(){
         }
 
         // Compares and saves the name that has highest average points
-        if (sum/(double)num_points > best_avg/(double)num_points){
-            best_avg = sum; // Saves current best sum to compare it to the next sum
+        if (sum/num_points > best_avg/num_points){
+            best_avg = sum;
             strcpy(best_avg_name, name);
         }
 
-        total_sums += sum; // Adds all sums together
-        sums[i] = sum; // Saves sum in all_sums[]
-        strcpy(names[i], name); // Saves name in names[]
+        total_sums += sum;
+        sums[i] = sum;
+        strcpy(names[i], name);
 
     }
 
+    // Print name with best average score
     printf("%s\n", best_avg_name);
 
     double avg = ((double)total_sums / num_students) / num_points;
