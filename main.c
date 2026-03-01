@@ -8,46 +8,58 @@
 #include <string.h>
 
 int main(){
-    char name[10];
-    char best_sum_name[10];
-    char below_average_names[5][10];
-    int points[13];
-    int points_average = 5; // points 0-10
-    int sum = 0;
-    int best_sum = 0;
+    const int num_students = 5;
+    const int num_points = 13;
+    const int len_name = 10;
+    
+    char name[len_name];
+    char names[num_students][len_name];
+    char best_avg_name[len_name];
+    int points[num_points];
+    int sums[num_students];
     int count = 0;
+    double sum = 0.0;
+    double best_avg = 0.0;
+    double total_sums = 0.0;
+    double current_avg = 0.0;
 
-    for (int i = 0; i < 5; i++){
+    for (int i = 0; i < num_students; i++){
         sum = 0;
         scanf("%s", name);
 
-        for (int i = 0; i < 13; i++){
+        for (int i = 0; i < num_points; i++){
             scanf("%d", &points[i]); 
             sum += points[i];
         }
         
         // If first letter is lowercase, make it uppercase.
-        if (name[0] > 90){ 
+        if (name[0] > (int)'Z'){ 
             name[0] = name[0] - 32;
         }
 
         // Compares and saves the name that has highest average points
-        if (sum/13.0 > best_sum/13.0){
-            best_sum = sum;
-            strcpy(best_sum_name, name);
+        if (sum/(double)num_points > best_avg/(double)num_points){
+            best_avg = sum; // Saves current best sum to compare it to the next sum
+            strcpy(best_avg_name, name);
         }
 
-        // Saves the names that have below average points
-        if (sum/13.0 <= points_average){
-            strcpy(below_average_names[count], name);
-            count++;
-        }
+        total_sums += sum; // Adds all sums together
+        sums[i] = sum; // Saves sum in all_sums[]
+        strcpy(names[i], name); // Saves name in names[]
+
     }
 
-    printf("%s\n", best_sum_name);
+    printf("%s\n", best_avg_name);
 
-    for (int i = 0; i < count; i++){
-        printf("%s\n", below_average_names[i]);
+    double avg = ((double)total_sums / num_students) / num_points;
+
+    // If score is below average: print name
+    for (int i = 0; i < num_students; i++) {
+        current_avg = (double)sums[i] / num_points;
+
+        if (current_avg < avg){
+            printf("%s\n", names[i]);
+        }
     }
 
     return 0;
