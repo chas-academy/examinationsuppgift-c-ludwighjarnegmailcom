@@ -23,7 +23,7 @@ int main(){
     double current_avg = 0.0;
 
     for (int i = 0; i < num_students; i++){
-        sum = 0;
+        sum = 0.0;
         scanf("%s", name);
 
         for (int i = 0; i < num_points; i++){
