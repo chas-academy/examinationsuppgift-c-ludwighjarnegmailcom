@@ -1,7 +1,7 @@
 /*
     Examinationsuppgift C - Fullstack .NET
     Ludwig Hjärne
-    2026-02-28
+    2026-03-04
 */
 
 #include <stdio.h>
@@ -17,7 +17,6 @@ int main(){
     char best_avg_name[len_name];
     int points[num_points];
     int sums[num_students];
-    int count = 0;
     double sum = 0.0;
     double best_avg = 0.0;
     double total_sums = 0.0;
@@ -33,7 +32,7 @@ int main(){
         }
         
         // If first letter is lowercase, make it uppercase.
-        if (name[0] > (int)'Z'){ 
+        if (name[0] > 'Z'){ 
             name[0] = name[0] - 32;
         }
 
@@ -52,7 +51,7 @@ int main(){
     // Print name with best average score
     printf("%s\n", best_avg_name);
 
-    double avg = ((double)total_sums / num_students) / num_points;
+    double avg = (total_sums / num_students) / num_points;
 
     // If score is below average: print name
     for (int i = 0; i < num_students; i++) {
